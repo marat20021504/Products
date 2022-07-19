@@ -46,6 +46,7 @@ const Wrapper = styled.div`
     }
 
     .Product-image {
+        overflow: hidden;
         height: 300px;
         background-color: white;
         display: flex;
@@ -55,10 +56,16 @@ const Wrapper = styled.div`
         padding: inherit;
         
         img {
+            object-fit: cover;
+            transition: all .3s ease-in-out;
             border-radius: 10px;
             width: 100%;
             height: 100%;
+            transform: scale(1);
 
+            &:hover {
+                transform: scale(1.1);
+            }
         }
 
     }

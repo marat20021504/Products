@@ -4,12 +4,19 @@ import styled from "styled-components"
 import { useState } from "react";
 import Product from "../components/Product";
 import LoadingSpinner from "../components/Loader";
+import Categories from "../components/Categories";
 
 const Products = () => {
-    const [product, SetProducts] = useState([])
+    const [product, SetProducts] = useState([], Categories)
     const [search, setSearch] = useState('')
     const [loading, setLoading] = useState(false)
 
+    const filterResult = (catItem) => {
+        const result = Categories.filter((curData) => {
+            return curData.category === catItem;
+        })
+        SetProducts(result)
+    }
     
     useEffect(() => {
         setLoading(true)
@@ -22,13 +29,26 @@ const Products = () => {
 
     return (
         <Wrapper>
-            <input 
-                type="text" 
-                placeholder="Search..."
-                onChange={(event) => {
-                    setSearch(event.target.value)
-                }}
-            />
+
+            <div className="form">
+                <input 
+                    type="text" 
+                    placeholder="Search..."
+                    onChange={(event) => {
+                        setSearch(event.target.value)
+                    }}
+                />
+            </div>
+
+            <div className="categories">
+                    <button onClick={() => SetProducts(Categories)}>All</button>
+                    <button onClick={() => filterResult('smartphones')}>Smartphones</button>
+                    <button onClick={() => filterResult('laptops')}>Laptops</button>
+                    <button onClick={() => filterResult('fragrances')}>Fragrances</button>
+                    <button onClick={() => filterResult('skincare')}>Skincare</button>
+                    <button onClick={() => filterResult('groceries')}>Groceries</button>
+                    <button onClick={() => filterResult('home-decoration')}>Home-Decoration</button>
+                </div>
 
             <div className="Container">
                 { 
@@ -68,6 +88,34 @@ const Wrapper = styled.div`
         overflow: hidden;
         display: block;
         margin: 20px auto;
+    }
+
+    .categories {
+        text-align: center;
+
+        button {
+            margin: 10px;
+            padding: 5px 15px;
+            border: none;
+            border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 18px;
+            color: #2872c7;
+            border: 1px solid #2872c7;
+            cursor: pointer;
+            transition: all 0.5s;
+            background-color: transparent;
+
+            &:hover {
+                background-color: #2872c7;
+                color: white;
+            }
+        }
+
+        .active{
+            background-color: #2872c7;
+            color: white;
+        }
     }
 
     .Container {

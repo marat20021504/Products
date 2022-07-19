@@ -112,12 +112,13 @@ const Wrapper = styled.div`
                     gap: 20px;
                     
                     div {
+                        overflow: hidden;
                         padding: 8px;
                         border-radius: 5px 2px 5px 2px;
                         box-shadow: 0px 4px 16px rgba(26, 31, 22, 0.15);
                         height: 120px;
                         width: 120px;
-                        object-fit: center;
+                        object-fit: cover;
 
                         object-fit: ${({category}) => 
                             category === "laptops" ? "contain" : "cover" 
@@ -134,6 +135,12 @@ const Wrapper = styled.div`
                         img {
                             width: 100%;
                             height: 100%;
+                            transition: all .3s ease-in-out;
+                            transform: scale(1);
+
+                            &:hover {
+                                transform: scale(1.2);
+                            }
                         }
                     }
 
@@ -144,9 +151,9 @@ const Wrapper = styled.div`
                     }
                 }
                 .bigImage {
+                    overflow: hidden;
                     width: 300px;
                     height: 302px;
-                    object-fit: cover;
                     padding: 8px;
                     background-color: white;
                     margin-right: 32px;
@@ -158,7 +165,15 @@ const Wrapper = styled.div`
                         width: 100%;
                         height: 100%;
                         border-radius: 10px;
+                        object-fit: cover;
+                        transition: all .3s ease-in-out;
+                        transform: scale(1);
+                        
+                        &:hover {
+                            transform: scale(1.1);
+                        }
                     }
+
 
                     object-fit: ${({category}) => 
                         category === "laptops" ? "contain" : "cover" 
